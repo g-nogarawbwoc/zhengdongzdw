@@ -60,7 +60,7 @@ public class ShiroFilterMapFactory {
 		filterChainDefinitionMap.put("/ApiController/**", "anon");
 
 		filterChainDefinitionMap.put("/oss/**", "anon");
-		filterChainDefinitionMap.put("/druid/**", "anon");
+		//filterChainDefinitionMap.put("/druid/**", "anon");
 
 		// 对所有页面进行认证
 		filterChainDefinitionMap.put("/**", "user");
