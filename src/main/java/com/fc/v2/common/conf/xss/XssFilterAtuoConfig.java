@@ -12,7 +12,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 
 
 @Configuration
-public class XssFilterAtuoConfig {
+public class XssFilterAtuoConfig { 
 
 	 
 	/**
@@ -24,10 +24,14 @@ public class XssFilterAtuoConfig {
 		FilterRegistrationBean registration = new FilterRegistrationBean();
 		//设置系统过滤器 (setFilter就是你所定义的过滤器filter类)
 		registration.setFilter(new SimpleCORSFilter());
+	
+
 		//过滤所有路径
 		registration.addUrlPatterns("/*");
 		//过滤器名称
 		registration.setName("XssFilter");
+		//添加忽略的格式以及链接请求
+		registration.addInitParameter("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid2/*");
 		//优先级
 		registration.setOrder(1);
 		return registration;
