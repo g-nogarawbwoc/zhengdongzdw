@@ -150,5 +150,8 @@ master为最新皮肤
 
 ### 使用v2做得系统
 
+- SpringBoot_v2 极简代码生成器
+https://gitee.com/dubai03/Codegenerator_v2
+
 ###牛油果
 [![Giteye chart](https://chart.giteye.net/gitee/bdj/SpringBoot_v2/Q9GZ48L3.png)](https://giteye.net/chart/Q9GZ48L3)
