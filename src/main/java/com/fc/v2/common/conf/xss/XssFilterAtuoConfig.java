@@ -2,7 +2,14 @@ package com.fc.v2.common.conf.xss;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fc.v2.common.conf.V2Config;
 
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +20,8 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 
 @Configuration
 public class XssFilterAtuoConfig { 
+	@Autowired
+	private V2Config v2Config;
 
 	 
 	/**
@@ -30,8 +39,16 @@ public class XssFilterAtuoConfig {
 		registration.addUrlPatterns("/*");
 		//过滤器名称
 		registration.setName("XssFilter");
+		
+		List<String> xssnoturlList= v2Config.getXssNotFilterUrl();
+		String xssnot="";
+		if(xssnoturlList!=null&&xssnoturlList.size()>0) {
+			xssnot=String.join(",", xssnoturlList);
+		}
+		
+		
 		//添加忽略的格式以及链接请求
-		registration.addInitParameter("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid2/*");
+		registration.addInitParameter("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid2/*,"+xssnot);
 		//优先级
 		registration.setOrder(1);
 		return registration;
